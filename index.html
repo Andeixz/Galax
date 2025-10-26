@@ -3,182 +3,2138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Saya - Halaman Utama</title>
-    
-    <!-- CSS Internal -->
+    <title>IDO Fundraising Terpercaya</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Gaya Umum */
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary-color: #00ffff;
+            --secondary-color: #ff00ff;
+            --accent-color: #ffff00;
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+            --card-bg: #1a1a2e;
+            --card-border: #16213e;
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8b8;
+            --neon-glow: 0 0 20px rgba(0, 255, 255, 0.5);
+            --neon-glow-pink: 0 0 20px rgba(255, 0, 255, 0.5);
+            --neon-glow-yellow: 0 0 20px rgba(255, 255, 0, 0.5);
+            --success-color: #00ff00;
+            --warning-color: #ffaa00;
+            --error-color: #ff0040;
+        }
+
+        [data-theme="dark"] {
+            --card-bg: #0f0f23;
+            --card-border: #1a1a3e;
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9; /* Warna latar sedikit lebih terang */
-            color: #333;
-            line-height: 1.6;
+            box-sizing: border-box;
+            font-family: 'Rajdhani', sans-serif;
         }
 
-        .container {
-            width: 90%;
-            max-width: 960px;
-            margin: auto;
-            overflow: hidden;
-            padding: 0 20px;
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
         }
 
-        /* Header & Navigasi */
-        header {
-            background-color: #2c3e50; /* Warna biru tua yang lebih modern */
-            color: #ecf0f1;
-            padding: 1rem 0;
-            position: sticky;
+        /* Gaming Animated Background */
+        .gaming-bg {
+            position: fixed;
             top: 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            z-index: 1000;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(255, 0, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 100%, rgba(255, 255, 0, 0.05) 0%, transparent 50%),
+                linear-gradient(180deg, #0a0a0a 0%, #1a0033 100%);
+            animation: bgPulse 10s ease-in-out infinite;
         }
 
-        header .container {
+        @keyframes bgPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .matrix-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            opacity: 0.05;
+        }
+
+        .matrix-column {
+            position: absolute;
+            top: -100%;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: var(--primary-color);
+            animation: matrixFall linear infinite;
+        }
+
+        @keyframes matrixFall {
+            to { transform: translateY(200vh); }
+        }
+
+        .floating-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            box-shadow: var(--neon-glow);
+            animation: particleFloat 15s infinite ease-in-out;
+        }
+
+        @keyframes particleFloat {
+            0%, 100% { 
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { 
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        .app-container {
+            max-width: 480px;
+            margin: 0 auto;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Gaming Header */
+        header {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(255, 0, 255, 0.1) 100%);
+            border-bottom: 2px solid var(--primary-color);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            box-shadow: var(--neon-glow);
+        }
+
+        header.hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+            margin-bottom: -200px;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.3), transparent);
+            animation: headerScan 3s linear infinite;
+        }
+
+        @keyframes headerScan {
+            to { left: 100%; }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            box-shadow: var(--neon-glow);
+            animation: logoPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes logoPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .logo-icon i {
+            font-size: 2rem;
+            color: var(--dark-bg);
+        }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: var(--neon-glow);
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.5)); }
+            to { filter: drop-shadow(0 0 20px rgba(255, 0, 255, 0.8)); }
+        }
+
+        .tagline {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .header-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid var(--primary-color);
+            border-radius: 10px;
+            min-width: 80px;
+        }
+
+        .stat-value {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+            text-shadow: var(--neon-glow);
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            padding-bottom: 100px;
+        }
+
+        .page {
+            display: none;
+            animation: pageFadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes pageFadeIn {
+            from { 
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .testimonial-container {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+            border: 2px solid var(--primary-color);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--neon-glow);
+        }
+
+        .testimonial-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--text-primary);
+            padding: 1.5rem;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.5s ease;
+        }
+
+        .testimonial-slide.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .testimonial-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            border: 3px solid var(--primary-color);
+            box-shadow: var(--neon-glow);
+        }
+
+        .testimonial-name {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .testimonial-rating {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--accent-color);
+        }
+
+        .testimonial-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .testimonial-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(0, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid var(--primary-color);
+        }
+
+        .dot.active {
+            background-color: var(--primary-color);
+            box-shadow: var(--neon-glow);
+            transform: scale(1.2);
+        }
+
+        .subscription-card {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.9), rgba(22, 33, 62, 0.9));
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border: 2px solid var(--card-border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .subscription-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            animation: borderGlow 2s linear infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .subscription-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: var(--neon-glow);
+        }
+
+        .subscription-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 1.5rem;
         }
 
-        header h1 {
-            margin: 0;
+        .subscription-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .subscription-price {
+            font-family: 'Orbitron', monospace;
             font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--accent-color);
+            text-shadow: var(--neon-glow-yellow);
         }
 
-        header nav ul {
-            margin: 0;
-            padding: 0;
-            list-style: none;
+        .subscription-features {
+            margin-bottom: 1.5rem;
         }
 
-        header nav ul li {
-            display: inline;
-            margin-left: 25px;
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
         }
 
-        header nav a {
-            color: #ecf0f1;
-            text-decoration: none;
-            font-weight: bold;
+        .feature-item i {
+            color: var(--success-color);
+            margin-right: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--dark-bg);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-align: center;
             font-size: 1rem;
-            transition: color 0.3s ease;
+            font-family: 'Orbitron', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
         }
 
-        header nav a:hover {
-            color: #3498db; /* Warna biru terang saat hover */
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
         }
 
-        /* Konten Utama */
-        main {
-            padding: 40px 0;
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
-        section {
-            background-color: #fff;
-            padding: 30px;
-            margin-bottom: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            border-left: 5px solid #3498db;
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--neon-glow);
         }
 
-        section h2 {
-            color: #2c3e50;
-            margin-top: 0;
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
         }
 
-        .svg-placeholder {
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: var(--dark-bg);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 800px;
-            height: auto;
-            display: block;
-            margin: 20px auto;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, var(--card-bg), var(--card-border));
+            border-radius: 20px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 400px;
+            max-height: 85vh;
+            overflow-y: auto;
+            animation: modalSlideIn 0.3s ease;
+            border: 2px solid var(--primary-color);
+            box-shadow: var(--neon-glow);
+        }
+
+        @keyframes modalSlideIn {
+            from { 
+                transform: translateY(-50px) scale(0.9);
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--primary-color);
+        }
+
+        .modal-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--error-color);
+            transform: rotate(90deg);
+        }
+
+        .payment-address {
+            background-color: rgba(0, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            position: relative;
+            border: 1px solid var(--primary-color);
+        }
+
+        .address-label {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .address-value {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            word-break: break-all;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--dark-bg);
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: var(--neon-glow);
+        }
+
+        .warning {
+            background-color: rgba(255, 170, 0, 0.1);
+            border-left: 4px solid var(--warning-color);
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
             border-radius: 8px;
         }
 
-        /* Footer */
-        footer {
-            background-color: #2c3e50;
-            color: #ecf0f1;
-            text-align: center;
-            padding: 25px 0;
-            margin-top: 40px;
+        .warning-title {
+            font-weight: 700;
+            color: var(--warning-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            header .container {
-                flex-direction: column;
+        .warning-title i {
+            margin-right: 0.5rem;
+        }
+
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--card-bg);
+            border: 2px solid var(--primary-color);
+            box-shadow: var(--neon-glow);
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2));
+            color: var(--text-primary);
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--primary-color);
+        }
+
+        .chat-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            border: 2px solid var(--primary-color);
+        }
+
+        .chat-info {
+            flex: 1;
+        }
+
+        .chat-name {
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+
+        .chat-status {
+            font-size: 0.85rem;
+            color: var(--success-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .chat-status::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background-color: var(--success-color);
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            animation: statusBlink 2s infinite;
+        }
+
+        @keyframes statusBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1.25rem;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .message {
+            margin-bottom: 1.25rem;
+            display: flex;
+            animation: messageSlideIn 0.3s ease;
+        }
+
+        @keyframes messageSlideIn {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
             }
-            header h1 {
-                margin-bottom: 15px;
+            to { 
+                opacity: 1;
+                transform: translateY(0);
             }
-            header nav ul li {
-                display: block;
-                text-align: center;
-                margin: 10px 0;
-            }
-            section {
-                padding: 20px;
+        }
+
+        .message.sent {
+            justify-content: flex-end;
+        }
+
+        .message-bubble {
+            max-width: 70%;
+            padding: 1rem;
+            border-radius: 18px;
+            position: relative;
+        }
+
+        .message.received .message-bubble {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+            border: 1px solid var(--primary-color);
+            border-top-left-radius: 0;
+        }
+
+        .message.sent .message-bubble {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--dark-bg);
+            border-top-right-radius: 0;
+        }
+
+        .message-time {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            margin-top: 0.5rem;
+        }
+
+        .chat-input-container {
+            padding: 1.25rem;
+            background: var(--card-bg);
+            border-top: 1px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .chat-input {
+            flex: 1;
+            border: 2px solid var(--primary-color);
+            border-radius: 25px;
+            padding: 0.875rem 1.25rem;
+            margin-right: 0.75rem;
+            background: rgba(0, 255, 255, 0.05);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: var(--neon-glow);
+            background: rgba(0, 255, 255, 0.1);
+        }
+
+        .chat-actions {
+            display: flex;
+        }
+
+        .chat-btn {
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-left: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-btn:hover {
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            transform: scale(1.1);
+            box-shadow: var(--neon-glow);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+            border-radius: 20px;
+            border: 2px solid var(--primary-color);
+            box-shadow: var(--neon-glow);
+        }
+
+        .profile-avatar {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            margin-right: 1.5rem;
+            border: 3px solid var(--primary-color);
+            box-shadow: var(--neon-glow);
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-name {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .profile-email {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .profile-section {
+            background: linear-gradient(135deg, var(--card-bg), var(--card-border));
+            border-radius: 20px;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            color: var(--primary-color);
+        }
+
+        .section-title i {
+            margin-right: 0.75rem;
+            font-size: 1.2rem;
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-label {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 55px;
+            height: 28px;
+            background-color: var(--card-border);
+            border-radius: 28px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid var(--primary-color);
+        }
+
+        .toggle-switch.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            box-shadow: var(--neon-glow);
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 22px;
+            height: 22px;
+            background-color: var(--text-primary);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(27px);
+            background-color: var(--dark-bg);
+        }
+
+        .referral-code {
+            background: rgba(0, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            border: 1px solid var(--primary-color);
+        }
+
+        .referral-value {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--accent-color);
+        }
+
+        .language-selector {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .language-btn {
+            padding: 0.625rem 1.25rem;
+            border-radius: 10px;
+            border: 2px solid var(--primary-color);
+            background: transparent;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .language-btn.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--dark-bg);
+            box-shadow: var(--neon-glow);
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.95), rgba(22, 33, 62, 0.95));
+            border-top: 2px solid var(--primary-color);
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 -5px 20px rgba(0, 255, 255, 0.2);
+        }
+
+        .footer-nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 0.625rem 0;
+        }
+
+        .nav-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.625rem;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            border-radius: 12px;
+        }
+
+        .nav-btn.active {
+            color: var(--primary-color);
+            background: rgba(0, 255, 255, 0.1);
+            box-shadow: var(--neon-glow);
+        }
+
+        .nav-btn i {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .nav-btn span {
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .nav-btn.active::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 3px;
+            box-shadow: var(--neon-glow);
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--dark-bg);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--neon-glow);
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+            z-index: 2000;
+            font-weight: 700;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .upload-container {
+            margin-top: 1.25rem;
+        }
+
+        .upload-label {
+            display: block;
+            margin-bottom: 0.625rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .upload-input {
+            display: none;
+        }
+
+        .upload-btn {
+            display: inline-block;
+            padding: 1rem;
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px dashed var(--primary-color);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            width: 100%;
+        }
+
+        .upload-btn:hover {
+            border-color: var(--secondary-color);
+            background: rgba(0, 255, 255, 0.1);
+            box-shadow: var(--neon-glow);
+        }
+
+        .upload-btn i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .upload-preview {
+            margin-top: 1rem;
+            max-width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--primary-color);
+        }
+
+        .upload-preview img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .app-container {
+                max-width: 100%;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Gaming Background -->
+    <div class="gaming-bg">
+        <div class="matrix-rain" id="matrix-rain"></div>
+        <div class="floating-particles" id="particles"></div>
+    </div>
 
-    <header>
-        <div class="container">
-            <h1>Logo Website</h1>
-            <nav>
-                <ul>
-                    <li><a href="#beranda">Beranda</a></li>
-                    <li><a href="#tentang">Tentang</a></li>
-                    <li><a href="#layanan">Layanan</a></li>
-                    <li><a href="#kontak">Kontak</a></li>
-                </ul>
+    <div class="app-container">
+        <header id="header">
+            <div class="header-content">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="logo">IDO</div>
+                </div>
+                <div class="tagline" data-translate="tagline">FUNDRAISING GAMING PLATFORM</div>
+                <div class="header-stats">
+                    <div class="stat-item">
+                        <span class="stat-value">10K+</span>
+                        <span class="stat-label">Investors</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">$5M+</span>
+                        <span class="stat-label">Assets</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">98%</span>
+                        <span class="stat-label">Trust</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="content">
+            <!-- Home Page -->
+            <div id="home-page" class="page active">
+                <div class="testimonial-container">
+                    <div class="testimonial-slide active">
+                        <img src="https://picsum.photos/seed/user1/90/90.jpg" alt="User" class="testimonial-avatar">
+                        <div class="testimonial-name">Ahmad Rahman</div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="testimonial-text" data-translate="testimonial1">"Platform investasi terbaik yang pernah saya gunakan. Keuntungan konsisten setiap bulan!"</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <img src="https://picsum.photos/seed/user2/90/90.jpg" alt="User" class="testimonial-avatar">
+                        <div class="testimonial-name">Siti Nurhaliza</div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="testimonial-text" data-translate="testimonial2">"Saya sangat puas dengan layanan ini. Tim support sangat responsif dan membantu."</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <img src="https://picsum.photos/seed/user3/90/90.jpg" alt="User" class="testimonial-avatar">
+                        <div class="testimonial-name">Budi Santoso</div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div class="testimonial-text" data-translate="testimonial3">"Investasi yang aman dan menguntungkan. Saya merekomendasikan ini ke teman-teman saya."</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <img src="https://picsum.photos/seed/user4/90/90.jpg" alt="User" class="testimonial-avatar">
+                        <div class="testimonial-name">Dewi Lestari</div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="testimonial-text" data-translate="testimonial4">"Sudah 6 bulan berinvestasi dan hasilnya melampaui ekspektasi saya. Terima kasih IDO!"</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <img src="https://picsum.photos/seed/user5/90/90.jpg" alt="User" class="testimonial-avatar">
+                        <div class="testimonial-name">Rizki Ahmad</div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="testimonial-text" data-translate="testimonial5">"Platform yang user-friendly dengan return yang stabil. Saya sangat senang dengan hasilnya."</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <img src="https://picsum.photos/seed/user6/90/90.jpg" alt="User" class="testimonial-avatar">
+                        <div class="testimonial-name">Maya Putri</div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="testimonial-text" data-translate="testimonial6">"Investasi pertama saya dan hasilnya sangat memuaskan. Proses withdrawal juga cepat dan mudah."</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <img src="https://picsum.photos/seed/user7/90/90.jpg" alt="User" class="testimonial-avatar">
+                        <div class="testimonial-name">Fajar Hidayat</div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div class="testimonial-text" data-translate="testimonial7">"Saya mencoba beberapa platform investasi, dan IDO adalah yang terbaik. Transparan dan terpercaya."</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <img src="https://picsum.photos/seed/user8/90/90.jpg" alt="User" class="testimonial-avatar">
+                        <div class="testimonial-name">Intan Permata</div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="testimonial-text" data-translate="testimonial8">"Keuntungan bulanan konsisten seperti yang dijanjikan. Sangat direkomendasikan untuk investor pemula."</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <img src="https://picsum.photos/seed/user9/90/90.jpg" alt="User" class="testimonial-avatar">
+                        <div class="testimonial-name">Andi Wijaya</div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="testimonial-text" data-translate="testimonial9">"Saya sudah mereferensikan ke banyak teman dan semuanya puas. Platform yang benar-benar terpercaya."</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <img src="https://picsum.photos/seed/user10/90/90.jpg" alt="User" class="testimonial-avatar">
+                        <div class="testimonial-name">Nina Kartika</div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="testimonial-text" data-translate="testimonial10">"Investasi jangka panjang yang sempurna. Saya melihat pertumbuhan portofolio saya setiap bulan."</div>
+                    </div>
+                    <div class="testimonial-dots">
+                        <span class="dot active" data-slide="0"></span>
+                        <span class="dot" data-slide="1"></span>
+                        <span class="dot" data-slide="2"></span>
+                        <span class="dot" data-slide="3"></span>
+                        <span class="dot" data-slide="4"></span>
+                        <span class="dot" data-slide="5"></span>
+                        <span class="dot" data-slide="6"></span>
+                        <span class="dot" data-slide="7"></span>
+                        <span class="dot" data-slide="8"></span>
+                        <span class="dot" data-slide="9"></span>
+                    </div>
+                </div>
+
+                <h2 data-translate="about-title">Tentang IDO Fundraising</h2>
+                <p data-translate="about-description">IDO Fundraising adalah platform investasi terpercaya yang menawarkan berbagai paket investasi dengan keuntungan bulanan yang stabil. Kami berkomitmen untuk memberikan layanan terbaik dan transparan kepada semua investor kami.</p>
+            </div>
+
+            <!-- IDO Page -->
+            <div id="ido-page" class="page">
+                <h2 data-translate="ido-title">PAKET INVESTASI IDO</h2>
+                
+                <div class="subscription-card">
+                    <div class="subscription-header">
+                        <div class="subscription-title" data-translate="bronze-package">BRONZE</div>
+                        <div class="subscription-price">$10</div>
+                    </div>
+                    <div class="subscription-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-translate="return-rate">Keuntungan 3% per bulan</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-translate="duration">Durasi 3 bulan</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-translate="support">Support 24/7</span>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="openSubscriptionModal('Bronze', 10, 3)" data-translate="subscribe-btn">BERLANGGANAN</button>
+                </div>
+
+                <div class="subscription-card">
+                    <div class="subscription-header">
+                        <div class="subscription-title" data-translate="silver-package">SILVER</div>
+                        <div class="subscription-price">$50</div>
+                    </div>
+                    <div class="subscription-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-translate="return-rate2">Keuntungan 5% per bulan</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-translate="duration2">Durasi 6 bulan</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-translate="support2">Support 24/7</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-translate="bonus">Bonus 1% untuk referral</span>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="openSubscriptionModal('Silver', 50, 5)" data-translate="subscribe-btn">BERLANGGANAN</button>
+                </div>
+
+                <div class="subscription-card">
+                    <div class="subscription-header">
+                        <div class="subscription-title" data-translate="gold-package">GOLD</div>
+                        <div class="subscription-price">$100</div>
+                    </div>
+                    <div class="subscription-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-translate="return-rate3">Keuntungan 8% per bulan</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-translate="duration3">Durasi 6 bulan</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-translate="support3">Support Prioritas</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-translate="bonus2">Bonus 2% untuk referral</span>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="openSubscriptionModal('Gold', 100, 8)" data-translate="subscribe-btn">BERLANGGANAN</button>
+                </div>
+
+                <div class="subscription-card">
+                    <div class="subscription-header">
+                        <div class="subscription-title" data-translate="platinum-package">PLATINUM</div>
+                        <div class="subscription-price">$500</div>
+                    </div>
+                    <div class="subscription-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-translate="return-rate4">Keuntungan 12% per bulan</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-translate="duration4">Durasi 12 bulan</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-translate="support4">Support VIP</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-translate="bonus3">Bonus 3% untuk referral</span>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="openSubscriptionModal('Platinum', 500, 12)" data-translate="subscribe-btn">BERLANGGANAN</button>
+                </div>
+
+                <div class="subscription-card">
+                    <div class="subscription-header">
+                        <div class="subscription-title" data-translate="diamond-package">DIAMOND</div>
+                        <div class="subscription-price">$1000</div>
+                    </div>
+                    <div class="subscription-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-translate="return-rate5">Keuntungan 15-20% per bulan</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-translate="duration5">Durasi 12 bulan</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-translate="support5">Support Eksklusif</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-translate="bonus4">Bonus 5% untuk referral</span>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="openSubscriptionModal('Diamond', 1000, 15)" data-translate="subscribe-btn">BERLANGGANAN</button>
+                </div>
+            </div>
+
+            <!-- Contact Page -->
+            <div id="contact-page" class="page">
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <img src="https://picsum.photos/seed/admin/45/45.jpg" alt="Admin" class="chat-avatar">
+                        <div class="chat-info">
+                            <div class="chat-name" data-translate="admin-name">ADMIN IDO</div>
+                            <div class="chat-status" data-translate="admin-status">ONLINE</div>
+                        </div>
+                    </div>
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="message received">
+                            <div class="message-bubble">
+                                <div data-translate="welcome-message">👋 Selamat datang di IDO Fundraising! Ada yang bisa saya bantu hari ini?</div>
+                                <div class="message-time">10:00</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input-container">
+                        <input type="text" class="chat-input" id="chat-input" placeholder="Ketik pesan..." data-translate-placeholder="chat-placeholder">
+                        <div class="chat-actions">
+                            <button class="chat-btn" id="upload-btn">
+                                <i class="fas fa-image"></i>
+                            </button>
+                            <button class="chat-btn" id="send-btn">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <input type="file" id="file-input" accept="image/*" style="display: none;">
+            </div>
+
+            <!-- Profile Page -->
+            <div id="profile-page" class="page">
+                <div class="profile-header">
+                    <img src="https://picsum.photos/seed/userprofile/85/85.jpg" alt="Profile" class="profile-avatar">
+                    <div class="profile-info">
+                        <div class="profile-name" id="user-name">GUEST USER</div>
+                        <div class="profile-email" id="user-email">guest@example.com</div>
+                    </div>
+                </div>
+
+                <div class="profile-section">
+                    <div class="section-title">
+                        <i class="fas fa-user-circle"></i>
+                        <span data-translate="account-info">INFORMASI AKUN</span>
+                    </div>
+                    <div id="login-section">
+                        <button class="btn" id="login-btn" data-translate="login">
+                            <i class="fab fa-google"></i> LOGIN DENGAN GOOGLE
+                        </button>
+                    </div>
+                    <div id="logout-section" style="display: none;">
+                        <button class="btn btn-secondary" id="logout-btn" data-translate="logout">
+                            <i class="fas fa-sign-out-alt"></i> LOGOUT
+                        </button>
+                    </div>
+                </div>
+
+                <div class="profile-section">
+                    <div class="section-title">
+                        <i class="fas fa-share-alt"></i>
+                        <span data-translate="referral">REFERRAL</span>
+                    </div>
+                    <div class="referral-code">
+                        <div class="referral-value" id="referral-code">IDO123456</div>
+                        <button class="btn btn-secondary" onclick="copyReferralCode()" data-translate="copy">
+                            <i class="fas fa-copy"></i> SALIN
+                        </button>
+                    </div>
+                    <p data-translate="referral-desc">Bagikan kode referral Anda kepada teman dan dapatkan bonus hingga 5% dari investasi mereka!</p>
+                </div>
+
+                <div class="profile-section">
+                    <div class="section-title">
+                        <i class="fas fa-cog"></i>
+                        <span data-translate="settings">PENGATURAN</span>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-label" data-translate="dark-mode">MODE GELAP</div>
+                        <div class="toggle-switch" id="dark-mode-toggle">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-label" data-translate="language">BAHASA</div>
+                        <div class="language-selector">
+                            <button class="language-btn active" data-lang="id">INDONESIA</button>
+                            <button class="language-btn" data-lang="en">ENGLISH</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <nav class="footer-nav">
+                <button class="nav-btn active" data-page="home">
+                    <i class="fas fa-home"></i>
+                    <span data-translate="nav-home">BERANDA</span>
+                </button>
+                <button class="nav-btn" data-page="ido">
+                    <i class="fas fa-coins"></i>
+                    <span data-translate="nav-ido">IDO</span>
+                </button>
+                <button class="nav-btn" data-page="contact">
+                    <i class="fas fa-comments"></i>
+                    <span data-translate="nav-contact">KONTAK</span>
+                </button>
+                <button class="nav-btn" data-page="profile">
+                    <i class="fas fa-user"></i>
+                    <span data-translate="nav-profile">PROFIL</span>
+                </button>
             </nav>
-        </div>
-    </header>
+        </footer>
+    </div>
 
-    <main class="container">
-        
-        <section id="beranda">
-            <h2>Selamat Datang di Website Saya!</h2>
-            <p>Ini adalah contoh halaman utama yang sederhana dan siap deploy. Website ini dibuat menggunakan HTML5 dan CSS dasar.</p>
+    <!-- Subscription Modal -->
+    <div class="modal" id="subscription-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="modal-title">PAKET BRONZE</div>
+                <button class="close-modal" id="close-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="payment-address">
+                    <div class="address-label">BSC:</div>
+                    <div class="address-value">0x15200f91b734c9898ef5d13ad9ba42a8fd793f8d</div>
+                    <button class="copy-btn" onclick="copyAddress('0x15200f91b734c9898ef5d13ad9ba42a8fd793f8d')">
+                        <i class="fas fa-copy"></i> SALIN
+                    </button>
+                </div>
+                <div class="payment-address">
+                    <div class="address-label">APTOS:</div>
+                    <div class="address-value">0x25ef3fb62bee2ca964199a956cf9e90bb7594401a1fb08dbd75bdef1416735eb</div>
+                    <button class="copy-btn" onclick="copyAddress('0x25ef3fb62bee2ca964199a956cf9e90bb7594401a1fb08dbd75bdef1416735eb')">
+                        <i class="fas fa-copy"></i> SALIN
+                    </button>
+                </div>
+                <div class="payment-address">
+                    <div class="address-label">TON:</div>
+                    <div class="address-value">UQCUBs8qO2pBT35pkh3PRBDxHVSzjUFE_gmOLUYX6Gvs4AEo</div>
+                    <button class="copy-btn" onclick="copyAddress('UQCUBs8qO2pBT35pkh3PRBDxHVSzjUFE_gmOLUYX6Gvs4AEo')">
+                        <i class="fas fa-copy"></i> SALIN
+                    </button>
+                </div>
+                <div class="warning">
+                    <div class="warning-title">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span data-translate="warning-title">PERINGATAN!</span>
+                    </div>
+                    <div data-translate="warning-text">Selalu periksa alamat dengan benar sebelum melakukan pengiriman deposit USDT. Transaksi yang salah alamat tidak dapat dikembalikan.</div>
+                </div>
+                <div class="upload-container">
+                    <label class="upload-label" data-translate="upload-label">UPLOAD BUKTI PEMBAYARAN</label>
+                    <input type="file" id="payment-proof" class="upload-input" accept="image/*">
+                    <label for="payment-proof" class="upload-btn">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <span data-translate="upload-btn">PILIH FILE</span>
+                    </label>
+                    <div class="upload-preview" id="upload-preview"></div>
+                </div>
+                <div style="margin-top: 1.25rem;">
+                    <label class="upload-label" data-translate="package-label">PILIH PAKET:</label>
+                    <select id="package-select" style="width: 100%; padding: 0.875rem; border-radius: 12px; border: 2px solid var(--primary-color); background: rgba(0, 255, 255, 0.05); color: var(--text-primary); font-size: 0.95rem;">
+                        <option value="Bronze">Paket Bronze - $10</option>
+                        <option value="Silver">Paket Silver - $50</option>
+                        <option value="Gold">Paket Gold - $100</option>
+                        <option value="Platinum">Paket Platinum - $500</option>
+                        <option value="Diamond">Paket Diamond - $1000</option>
+                    </select>
+                </div>
+                <div style="margin-top: 1.25rem;">
+                    <label class="upload-label" data-translate="email-label">EMAIL ANDA:</label>
+                    <input type="email" id="user-email-input" placeholder="email@example.com" style="width: 100%; padding: 0.875rem; border-radius: 12px; border: 2px solid var(--primary-color); background: rgba(0, 255, 255, 0.05); color: var(--text-primary); font-size: 0.95rem;">
+                </div>
+                <button class="btn" style="width: 100%; margin-top: 1.5rem;" onclick="submitPayment()" data-translate="submit-payment">
+                    <i class="fas fa-paper-plane"></i> KIRIM BUKTI PEMBAYARAN
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <script>
+        // Translation data
+        const translations = {
+            id: {
+                "tagline": "FUNDRAISING GAMING PLATFORM",
+                "testimonial1": "\"Platform investasi terbaik yang pernah saya gunakan. Keuntungan konsisten setiap bulan!\"",
+                "testimonial2": "\"Saya sangat puas dengan layanan ini. Tim support sangat responsif dan membantu.\"",
+                "testimonial3": "\"Investasi yang aman dan menguntungkan. Saya merekomendasikan ini ke teman-teman saya.\"",
+                "testimonial4": "\"Sudah 6 bulan berinvestasi dan hasilnya melampaui ekspektasi saya. Terima kasih IDO!\"",
+                "testimonial5": "\"Platform yang user-friendly dengan return yang stabil. Saya sangat senang dengan hasilnya.\"",
+                "testimonial6": "\"Investasi pertama saya dan hasilnya sangat memuaskan. Proses withdrawal juga cepat dan mudah.\"",
+                "testimonial7": "\"Saya mencoba beberapa platform investasi, dan IDO adalah yang terbaik. Transparan dan terpercaya.\"",
+                "testimonial8": "\"Keuntungan bulanan konsisten seperti yang dijanjikan. Sangat direkomendasikan untuk investor pemula.\"",
+                "testimonial9": "\"Saya sudah mereferensikan ke banyak teman dan semuanya puas. Platform yang benar-benar terpercaya.\"",
+                "testimonial10": "\"Investasi jangka panjang yang sempurna. Saya melihat pertumbuhan portofolio saya setiap bulan.\"",
+                "about-title": "TENTANG IDO FUNDRAISING",
+                "about-description": "IDO Fundraising adalah platform investasi terpercaya yang menawarkan berbagai paket investasi dengan keuntungan bulanan yang stabil. Kami berkomitmen untuk memberikan layanan terbaik dan transparan kepada semua investor kami.",
+                "ido-title": "PAKET INVESTASI IDO",
+                "bronze-package": "BRONZE",
+                "silver-package": "SILVER",
+                "gold-package": "GOLD",
+                "platinum-package": "PLATINUM",
+                "diamond-package": "DIAMOND",
+                "return-rate": "Keuntungan 3% per bulan",
+                "return-rate2": "Keuntungan 5% per bulan",
+                "return-rate3": "Keuntungan 8% per bulan",
+                "return-rate4": "Keuntungan 12% per bulan",
+                "return-rate5": "Keuntungan 15-20% per bulan",
+                "duration": "Durasi 3 bulan",
+                "duration2": "Durasi 6 bulan",
+                "duration3": "Durasi 6 bulan",
+                "duration4": "Durasi 12 bulan",
+                "duration5": "Durasi 12 bulan",
+                "support": "Support 24/7",
+                "support2": "Support 24/7",
+                "support3": "Support Prioritas",
+                "support4": "Support VIP",
+                "support5": "Support Eksklusif",
+                "bonus": "Bonus 1% untuk referral",
+                "bonus2": "Bonus 2% untuk referral",
+                "bonus3": "Bonus 3% untuk referral",
+                "bonus4": "Bonus 5% untuk referral",
+                "subscribe-btn": "BERLANGGANAN",
+                "admin-name": "ADMIN IDO",
+                "admin-status": "ONLINE",
+                "welcome-message": "👋 Selamat datang di IDO Fundraising! Ada yang bisa saya bantu hari ini?",
+                "chat-placeholder": "Ketik pesan...",
+                "account-info": "INFORMASI AKUN",
+                "login": "LOGIN DENGAN GOOGLE",
+                "logout": "LOGOUT",
+                "referral": "REFERRAL",
+                "referral-desc": "Bagikan kode referral Anda kepada teman dan dapatkan bonus hingga 5% dari investasi mereka!",
+                "copy": "SALIN",
+                "settings": "PENGATURAN",
+                "dark-mode": "MODE GELAP",
+                "language": "BAHASA",
+                "nav-home": "BERANDA",
+                "nav-ido": "IDO",
+                "nav-contact": "KONTAK",
+                "nav-profile": "PROFIL",
+                "warning-title": "PERINGATAN!",
+                "warning-text": "Selalu periksa alamat dengan benar sebelum melakukan pengiriman deposit USDT. Transaksi yang salah alamat tidak dapat dikembalikan.",
+                "upload-label": "UPLOAD BUKTI PEMBAYARAN",
+                "upload-btn": "PILIH FILE",
+                "package-label": "PILIH PAKET:",
+                "email-label": "EMAIL ANDA:",
+                "submit-payment": "KIRIM BUKTI PEMBAYARAN"
+            },
+            en: {
+                "tagline": "FUNDRAISING GAMING PLATFORM",
+                "testimonial1": "\"The best investment platform I've ever used. Consistent profits every month!\"",
+                "testimonial2": "\"I'm very satisfied with this service. The support team is very responsive and helpful.\"",
+                "testimonial3": "\"Safe and profitable investment. I recommend this to my friends.\"",
+                "testimonial4": "\"I've been investing for 6 months and the results exceeded my expectations. Thank you IDO!\"",
+                "testimonial5": "\"User-friendly platform with stable returns. I'm very happy with the results.\"",
+                "testimonial6": "\"My first investment and the results are very satisfying. Withdrawal process is also fast and easy.\"",
+                "testimonial7": "\"I've tried several investment platforms, and IDO is the best. Transparent and trustworthy.\"",
+                "testimonial8": "\"Consistent monthly profits as promised. Highly recommended for beginner investors.\"",
+                "testimonial9": "\"I've referred many friends and they're all satisfied. A truly trustworthy platform.\"",
+                "testimonial10": "\"Perfect long-term investment. I see my portfolio grow every month.\"",
+                "about-title": "ABOUT IDO FUNDRAISING",
+                "about-description": "IDO Fundraising is a trusted investment platform that offers various investment packages with stable monthly profits. We are committed to providing the best and transparent service to all our investors.",
+                "ido-title": "IDO INVESTMENT PACKAGES",
+                "bronze-package": "BRONZE",
+                "silver-package": "SILVER",
+                "gold-package": "GOLD",
+                "platinum-package": "PLATINUM",
+                "diamond-package": "DIAMOND",
+                "return-rate": "3% profit per month",
+                "return-rate2": "5% profit per month",
+                "return-rate3": "8% profit per month",
+                "return-rate4": "12% profit per month",
+                "return-rate5": "15-20% profit per month",
+                "duration": "3 months duration",
+                "duration2": "6 months duration",
+                "duration3": "6 months duration",
+                "duration4": "12 months duration",
+                "duration5": "12 months duration",
+                "support": "24/7 Support",
+                "support2": "24/7 Support",
+                "support3": "Priority Support",
+                "support4": "VIP Support",
+                "support5": "Exclusive Support",
+                "bonus": "1% referral bonus",
+                "bonus2": "2% referral bonus",
+                "bonus3": "3% referral bonus",
+                "bonus4": "5% referral bonus",
+                "subscribe-btn": "SUBSCRIBE",
+                "admin-name": "ADMIN IDO",
+                "admin-status": "ONLINE",
+                "welcome-message": "👋 Welcome to IDO Fundraising! How can I help you today?",
+                "chat-placeholder": "Type a message...",
+                "account-info": "ACCOUNT INFORMATION",
+                "login": "LOGIN WITH GOOGLE",
+                "logout": "LOGOUT",
+                "referral": "REFERRAL",
+                "referral-desc": "Share your referral code with friends and get up to 5% bonus from their investment!",
+                "copy": "COPY",
+                "settings": "SETTINGS",
+                "dark-mode": "DARK MODE",
+                "language": "LANGUAGE",
+                "nav-home": "HOME",
+                "nav-ido": "IDO",
+                "nav-contact": "CONTACT",
+                "nav-profile": "PROFILE",
+                "warning-title": "WARNING!",
+                "warning-text": "Always check the address correctly before sending USDT deposit. Transactions with wrong address cannot be refunded.",
+                "upload-label": "UPLOAD PAYMENT PROOF",
+                "upload-btn": "CHOOSE FILE",
+                "package-label": "SELECT PACKAGE:",
+                "email-label": "YOUR EMAIL:",
+                "submit-payment": "SEND PAYMENT PROOF"
+            }
+        };
+
+        let currentLang = 'id';
+        let currentSlide = 0;
+        let isLoggedIn = false;
+        let userName = '';
+        let userEmail = '';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create matrix rain effect
+            createMatrixRain();
             
-            <!-- Gambar SVG yang ditanam langsung, tidak perlu koneksi internet untuk menampilkannya -->
-            <svg class="svg-placeholder" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
-                <rect width="800" height="400" fill="#e0e0e0"/>
-                <text x="50%" y="50%" font-family="sans-serif" font-size="24" fill="#555" text-anchor="middle" dy=".3em">Gambar Utama (SVG Placeholder)</text>
-            </svg>
+            // Create floating particles
+            createParticles();
+            
+            // Testimonial slider
+            initTestimonialSlider();
+            
+            // Navigation
+            initNavigation();
+            
+            // Dark mode toggle
+            initDarkMode();
+            
+            // Language selector
+            initLanguageSelector();
+            
+            // Login/Logout
+            initAuth();
+            
+            // Chat functionality
+            initChat();
+            
+            // Modal
+            initModal();
+            
+            // File upload
+            initFileUpload();
+            
+            // Check for saved theme
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.getElementById('dark-mode-toggle').classList.add('active');
+            }
+            
+            // Check for saved language
+            const savedLang = localStorage.getItem('language');
+            if (savedLang && (savedLang === 'id' || savedLang === 'en')) {
+                currentLang = savedLang;
+                updateLanguage();
+            }
+        });
 
-            <p>Gambar di atas adalah sebuah placeholder berbasis SVG. Anda bisa menggantinya dengan tag <code>&lt;img src="gambar-anda.jpg"&gt;</code> nanti.</p>
-        </section>
+        // Create Matrix Rain Effect
+        function createMatrixRain() {
+            const matrixRain = document.getElementById('matrix-rain');
+            const columns = Math.floor(window.innerWidth / 20);
+            
+            for (let i = 0; i < columns; i++) {
+                const column = document.createElement('div');
+                column.className = 'matrix-column';
+                column.style.left = `${i * 20}px`;
+                column.style.animationDuration = `${Math.random() * 5 + 5}s`;
+                column.style.animationDelay = `${Math.random() * 5}s`;
+                column.textContent = Math.random() > 0.5 ? '1' : '0';
+                matrixRain.appendChild(column);
+            }
+        }
 
-        <section id="tentang">
-            <h2>Tentang Kami</h2>
-            <p>Kami adalah sebuah contoh perusahaan yang fokus memberikan solusi sederhana dan efektif. Misi kami adalah untuk membuat teknologi mudah diakses oleh semua orang.</p>
-        </section>
+        // Create Floating Particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 20;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                particlesContainer.appendChild(particle);
+            }
+        }
 
-        <section id="layanan">
-            <h2>Layanan Kami</h2>
-            <p>Kami menawarkan berbagai layanan, antara lain:</p>
-            <ul>
-                <li>Pengembangan Web Sederhana</li>
-                <li>Konsultasi Tata Letak (Layout)</li>
-                <li>Panduan HTML & CSS untuk Pemula</li>
-            </ul>
-        </section>
+        // Testimonial slider
+        function initTestimonialSlider() {
+            const slides = document.querySelectorAll('.testimonial-slide');
+            const dots = document.querySelectorAll('.dot');
+            
+            function showSlide(index) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                dots.forEach(dot => dot.classList.remove('active'));
+                
+                slides[index].classList.add('active');
+                dots[index].classList.add('active');
+                currentSlide = index;
+            }
+            
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => showSlide(index));
+            });
+            
+            // Auto-advance slides
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }, 5000);
+        }
 
-    </main>
+        // Navigation
+        function initNavigation() {
+            const navButtons = document.querySelectorAll('.nav-btn');
+            const pages = document.querySelectorAll('.page');
+            const header = document.getElementById('header');
+            
+            navButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetPage = button.getAttribute('data-page');
+                    
+                    // Update active nav button
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    // Show target page
+                    pages.forEach(page => page.classList.remove('active'));
+                    document.getElementById(`${targetPage}-page`).classList.add('active');
+                    
+                    // Show/hide header based on page
+                    if (targetPage === 'home') {
+                        header.classList.remove('hidden');
+                    } else {
+                        header.classList.add('hidden');
+                    }
+                });
+            });
+        }
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Website Saya. Hak Cipta Dilindungi.</p>
-        </div>
-    </footer>
+        // Dark mode toggle
+        function initDarkMode() {
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            
+            darkModeToggle.addEventListener('click', () => {
+                darkModeToggle.classList.toggle('active');
+                
+                if (darkModeToggle.classList.contains('active')) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('darkMode', 'true');
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                    localStorage.setItem('darkMode', 'false');
+                }
+            });
+        }
 
+        // Language selector
+        function initLanguageSelector() {
+            const languageButtons = document.querySelectorAll('.language-btn');
+            
+            languageButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const lang = button.getAttribute('data-lang');
+                    
+                    // Update active button
+                    languageButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    // Update language
+                    currentLang = lang;
+                    localStorage.setItem('language', lang);
+                    updateLanguage();
+                });
+            });
+        }
+
+        // Update language
+        function updateLanguage() {
+            const elements = document.querySelectorAll('[data-translate]');
+            
+            elements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[currentLang][key]) {
+                    element.textContent = translations[currentLang][key];
+                }
+            });
+            
+            // Update placeholders
+            const placeholders = document.querySelectorAll('[data-translate-placeholder]');
+            placeholders.forEach(element => {
+                const key = element.getAttribute('data-translate-placeholder');
+                if (translations[currentLang][key]) {
+                    element.placeholder = translations[currentLang][key];
+                }
+            });
+        }
+
+        // Authentication
+        function initAuth() {
+            const loginBtn = document.getElementById('login-btn');
+            const logoutBtn = document.getElementById('logout-btn');
+            
+            loginBtn.addEventListener('click', () => {
+                // Simulate Google login
+                isLoggedIn = true;
+                userName = 'John Doe';
+                userEmail = 'john.doe@example.com';
+                
+                document.getElementById('user-name').textContent = userName.toUpperCase();
+                document.getElementById('user-email').textContent = userEmail;
+                document.getElementById('login-section').style.display = 'none';
+                document.getElementById('logout-section').style.display = 'block';
+                
+                showNotification('✅ LOGIN BERHASIL! SELAMAT DATANG, ' + userName.toUpperCase());
+            });
+            
+            logoutBtn.addEventListener('click', () => {
+                isLoggedIn = false;
+                userName = '';
+                userEmail = '';
+                
+                document.getElementById('user-name').textContent = 'GUEST USER';
+                document.getElementById('user-email').textContent = 'guest@example.com';
+                document.getElementById('login-section').style.display = 'block';
+                document.getElementById('logout-section').style.display = 'none';
+                
+                showNotification('👋 ANDA TELAH LOGOUT');
+            });
+        }
+
+        // Chat functionality
+        function initChat() {
+            const chatInput = document.getElementById('chat-input');
+            const sendBtn = document.getElementById('send-btn');
+            const uploadBtn = document.getElementById('upload-btn');
+            const fileInput = document.getElementById('file-input');
+            const chatMessages = document.getElementById('chat-messages');
+            
+            function sendMessage() {
+                const message = chatInput.value.trim();
+                if (message) {
+                    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                    
+                    // Add user message
+                    const userMessage = document.createElement('div');
+                    userMessage.className = 'message sent';
+                    userMessage.innerHTML = `
+                        <div class="message-bubble">
+                            <div>${message}</div>
+                            <div class="message-time">${time}</div>
+                        </div>
+                    `;
+                    chatMessages.appendChild(userMessage);
+                    
+                    // Clear input
+                    chatInput.value = '';
+                    
+                    // Simulate admin response
+                    setTimeout(() => {
+                        const adminMessage = document.createElement('div');
+                        adminMessage.className = 'message received';
+                        adminMessage.innerHTML = `
+                            <div class="message-bubble">
+                                <div>Terima kasih atas pesan Anda. Tim kami akan segera merespons.</div>
+                                <div class="message-time">${time}</div>
+                            </div>
+                        `;
+                        chatMessages.appendChild(adminMessage);
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    }, 1000);
+                    
+                    // Scroll to bottom
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
+            }
+            
+            sendBtn.addEventListener('click', sendMessage);
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            
+            uploadBtn.addEventListener('click', () => {
+                fileInput.click();
+            });
+            
+            fileInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                        
+                        // Add image message
+                        const imageMessage = document.createElement('div');
+                        imageMessage.className = 'message sent';
+                        imageMessage.innerHTML = `
+                            <div class="message-bubble">
+                                <img src="${e.target.result}" style="max-width: 100%; border-radius: 10px;">
+                                <div class="message-time">${time}</div>
+                            </div>
+                        `;
+                        chatMessages.appendChild(imageMessage);
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        // Modal
+        function initModal() {
+            const modal = document.getElementById('subscription-modal');
+            const closeModal = document.getElementById('close-modal');
+            
+            closeModal.addEventListener('click', () => {
+                modal.classList.remove('active');
+            });
+            
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        }
+
+        // Open subscription modal
+        function openSubscriptionModal(packageName, price, returnRate) {
+            const modal = document.getElementById('subscription-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const packageSelect = document.getElementById('package-select');
+            
+            modalTitle.textContent = `${packageName.toUpperCase()} PACKAGE - $${price}`;
+            packageSelect.value = packageName;
+            
+            modal.classList.add('active');
+        }
+
+        // Copy address
+        function copyAddress(address) {
+            navigator.clipboard.writeText(address).then(() => {
+                showNotification('✅ ALAMAT BERHASIL DISALIN!');
+            });
+        }
+
+        // Copy referral code
+        function copyReferralCode() {
+            const referralCode = document.getElementById('referral-code').textContent;
+            navigator.clipboard.writeText(referralCode).then(() => {
+                showNotification('✅ KODE REFERRAL BERHASIL DISALIN!');
+            });
+        }
+
+        // File upload
+        function initFileUpload() {
+            const paymentProof = document.getElementById('payment-proof');
+            const uploadPreview = document.getElementById('upload-preview');
+            
+            paymentProof.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        uploadPreview.innerHTML = `<img src="${e.target.result}" alt="Payment Proof">`;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        // Submit payment
+        function submitPayment() {
+            const packageSelect = document.getElementById('package-select');
+            const userEmailInput = document.getElementById('user-email-input');
+            const paymentProof = document.getElementById('payment-proof');
+            
+            if (!userEmailInput.value) {
+                showNotification('⚠️ MOHON MASUKKAN EMAIL ANDA!');
+                return;
+            }
+            
+            if (!paymentProof.files.length) {
+                showNotification('⚠️ MOHON UPLOAD BUKTI PEMBAYARAN!');
+                return;
+            }
+            
+            // Simulate submission
+            showNotification('✅ BUKTI PEMBAYARAN BERHASIL DIKIRIM! KAMI AKAN MEMVERIFIKASI PEMBAYARAN ANDA DALAM 24 JAM.');
+            
+            // Close modal
+            document.getElementById('subscription-modal').classList.remove('active');
+            
+            // Reset form
+            userEmailInput.value = '';
+            paymentProof.value = '';
+            document.getElementById('upload-preview').innerHTML = '';
+        }
+
+        // Show notification
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+    </script>
 </body>
 </html>
